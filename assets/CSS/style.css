@@ -1,0 +1,139 @@
+*{
+    padding: 0;
+    margin: 0;
+    font-family: sans-serif;
+    color: #fff;
+}
+body{
+    background-color: #2d3b5a;
+    display: flex;
+}
+.menu{
+    background-image: linear-gradient(136.13deg, #ffaf28, #ff8723);
+    width: 60px;
+    height: 100vh;
+    overflow: hidden;
+    transition: .3s;
+}
+.menu-home--margin{
+    margin-top: 10px;
+}
+.menu:hover{
+    width: 260px;
+}
+ul{
+    list-style: none;
+    position: relative;
+    height: 95%;
+}
+ul li a{
+    display: block;
+    text-decoration: none;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    transition: .5s;
+    color: #fff;
+}
+ul li a:hover{
+    background-color: #c48d35;
+}
+
+i{
+    color: white;
+    font-size: 24px;
+    flex-shrink: 0;
+    width: 60px;
+}
+.menu-logout{
+    position: absolute;
+    bottom:0;
+    width: 100%;
+    text-wrap: nowrap;
+}
+.menu-logout a{
+    background-image: linear-gradient(315.64deg, #5c61a3, #105ba6 50%, #09203f);
+}
+.main{
+    width: 100%;
+    position: relative;
+}
+.main-lang .main-links--after::after{
+    content: " | ";
+}
+.main-lang a{
+    text-decoration: none;
+    display: inline-block;
+}
+.main-lang{
+    position: absolute;
+    top: 26px;
+    right: 40px;
+}
+thead{
+    background-color: #e5e5e5;
+}
+th{
+    padding: 10px;
+    color: #2d3b59;
+}
+td{
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+.main-btn{
+    border: none;
+}
+ .main-btn a{
+    background: linear-gradient(136.13deg, #ffaf28, #ff8723);
+    color: #fff;
+    padding: 10px;
+    border-radius: 4px;
+    text-decoration: none;
+ }
+.action-button{
+    border: none;
+    background-color: #f5516f;
+    cursor: pointer;
+    border-radius: 4px;
+    text-decoration: none;
+    color: black;
+    padding: 2px;
+}
+.update-button{
+    background-color: #219ebc;
+}
+.main-table--flex{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 24px;
+}
+.main-btn-container{
+    margin-top: 50px;
+    margin-left: 50px;
+    
+}
+table{
+    text-wrap: nowrap;
+    text-align: center;
+}
+.statistic{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin-top: 6%;
+    gap: 4px;
+}
+.statistic-card{
+    background-color: #e5e5e5;
+    width: 30%;
+    padding: 8px;
+    border-radius: 8px;
+    /* text-align: center; */
+}
+.statistic-paragraph{
+    color: #2d3b5a;
+}
