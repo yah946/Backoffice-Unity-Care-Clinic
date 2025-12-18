@@ -40,10 +40,11 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
     <meta name="author" content="Moha Sr">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="./assets/images/favicon.ico">
+    <link rel="stylesheet" href="./assets/CSS/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <title>Insert a departement</title>
 </head>
-<body>
+<body class="insert">
     <h1 class="title">Add A Departments</h1>
     <?php
         if(isset($_GET['id']) && is_numeric($_GET['id'])){
@@ -61,11 +62,9 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
     method="POST"
     >
         <input id="id" type="hidden" value="<?= $id ?? '' ?>">
-        <label for="firstName">Departement Name:</label>
-        <input id="firstName" type="text" name="depName" value="<?= $dname ?? '' ?>">
-        <label for="lastName">Location:</label>
-        <input id="lastName" type="text" name="location" value="<?= $location ?? '' ?>">
-        <button class="btn" type="submit" name="submit">
+        <input placeholder="Departement Name" type="text" name="depName" value="<?= $dname ?? '' ?>">
+        <input placeholder="Location" type="text" name="location" value="<?= $location ?? '' ?>">
+        <button class="form_button" type="submit" name="submit">
             <?php
             if(isset($_GET['id'])){
                 echo "Update";

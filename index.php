@@ -1,3 +1,10 @@
+<?php
+// $domain='main';
+// $long='fr_FR';
+// bindtextdomain($domain,realpath('./') . DIRECTORY_SEPARATOR . 'locale');
+// textdomain($domain);
+// setlocale(LC_ALL,'fr_FR');
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

@@ -132,8 +132,59 @@ table{
     width: 30%;
     padding: 8px;
     border-radius: 8px;
+    color: #2d3b5a;
     /* text-align: center; */
 }
 .statistic-paragraph{
     color: #2d3b5a;
+}
+/* Pagination links */
+.pagination a {
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+  transition: background-color .3s;
+}
+/* Add a grey background color on mouse-over */
+.pagination a:hover:not(.active) {background-color: #ddd;}
+/* Insertion */
+.title{
+    text-transform: uppercase;
+}
+form{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+form input,form button, form select{
+    width: 45%;
+    height: 38px;
+    color: white;
+    background-color: transparent;
+    border: solid 1px greenyellow;
+    align-self: center;
+    font-size: 22px;
+    padding-left: 1%;
+    padding-right: 1%;
+}
+.form label{
+    align-self: center;
+}
+.form_button{
+    width: 40%;
+    cursor: pointer;
+    background-image: linear-gradient(136.13deg, #ffaf28, #ff8723);;
+    align-self: center;
+    border:none;
+    color: #fff;
+}
+.insert{
+    display: flex;
+    flex-direction: column;
+    padding: 28px;
+    gap: 32px;
+}
+select option{
+    background-color: #09203f;
 }

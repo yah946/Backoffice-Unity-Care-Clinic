@@ -56,9 +56,15 @@
             <tbody>
                 <?php
                     include('config.php');
-                    $sql = 'select * from departement';
-                    $select_all = mysqli_query($conn,$sql);
-                    while($row = mysqli_fetch_assoc($select_all)){
+                    $start = 0;
+                    if(isset($_GET['page-nr'])){
+                        $page = $_GET['page-nr'] - 1;
+                        $start = $page * 7;
+                    }
+                    $sql = "select * from departement order by id limit 7 offset $start";
+                    $select_limit = mysqli_query($conn,$sql);
+                    $pages=ceil(mysqli_num_rows(mysqli_query($conn,"select * from departement"))/7);
+                    while($row = mysqli_fetch_assoc($select_limit)){
                         echo "
                         <tr>
                             <td>$row[departementName]</td>
@@ -76,6 +82,16 @@
             <tbody>
         </div>
     </table>
+    <div class="pagination">
+        <a href="?page-nr=1">&laquo;</a>
+        <?php
+        for($i=1 ;$i<=$pages;$i++){?>
+        <a href="?page-nr=<?php echo $i ?>"><?php echo $i ?></a>
+        <?php
+        }
+        ?>
+        <a href="?page-nr=<?php echo $pages;?>">&raquo;</a>
+    </div>
     </main>
 </body>
 </html>

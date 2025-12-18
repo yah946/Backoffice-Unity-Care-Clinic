@@ -14,7 +14,7 @@
 <body>
     <aside class="menu">
         <ul>
-            <li class="menu-home--margin"><a href="index.php">
+            <li class="menu-home--margin"><a class="active" href="index.php">
                 <i class="fa-solid fa-house"></i>
                 <p>Home</p>
             </a></li>
@@ -59,9 +59,15 @@
             <tbody>
                 <?php
                     include('config.php');
-                    $sql = 'select * from doctor';
-                    $select_all = mysqli_query($conn,$sql);
-                    while($row = mysqli_fetch_assoc($select_all)){
+                    $start = 0;
+                    if(isset($_GET['page-nr'])){
+                        $page = $_GET['page-nr'] - 1;
+                        $start = $page * 7;
+                    }
+                    $sql = "select * from doctor order by id limit 7 offset $start";
+                    $select_limit = mysqli_query($conn,$sql);
+                    $pages=ceil(mysqli_num_rows(mysqli_query($conn,"select * from doctor"))/7);
+                    while($row = mysqli_fetch_assoc($select_limit)){
                         echo "
                         <tr>
                             <td>$row[firstName]</td>
@@ -82,6 +88,16 @@
             <tbody>
         </div>
     </table>
+    <div class="pagination">
+        <a href="?page-nr=1">&laquo;</a>
+        <?php
+        for($i=1 ;$i<=$pages;$i++){?>
+        <a href="?page-nr=<?php echo $i ?>"><?php echo $i ?></a>
+        <?php
+        }
+        ?>
+        <a href="?page-nr=<?php echo $pages;?>">&raquo;</a>
+    </div>
     </main>
 </body>
 </html>

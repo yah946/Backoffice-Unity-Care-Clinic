@@ -44,10 +44,11 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
     <meta name="author" content="Moha Sr">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="./assets/images/favicon.ico">
+    <link rel="stylesheet" href="./assets/CSS/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <title>Insert a Doctor</title>
 </head>
-<body>
+<body class="insert">
     <h1 class="title">Add A Doctor</h1>
     <?php
         if(isset($_GET['id']) && is_numeric($_GET['id'])){
@@ -68,17 +69,24 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
     method="POST"
     >
         <input id="id" type="hidden" value="<?= $id ?? '' ?>">
-        <label for="firstName">First Name:</label>
-        <input id="firstName" type="text" name="firstName" value="<?= $fname ?? '' ?>">
-        <label for="lastName">Last Name:</label>
-        <input id="lastName" type="text" name="lastName" value="<?= $lname ?? '' ?>">
-        <label for="specialization">Specialization:</label>
-        <input id="specialization" type="text" name="specialization" value="<?= $special ?? '' ?>">
-        <label for="tel">Tel:</label>
-        <input id="tel" type="text" name="phone" value="<?= $tel ?? '' ?>">
-        <label for="email">Email:</label>
-        <input id="email" type="email" name="email" value="<?= $Email ?? '' ?>">
-        <button class="btn" type="submit" name="submit">
+        <input placeholder="First Name" type="text" name="firstName" value="<?= $fname ?? '' ?>">
+        <input placeholder="Last Name" type="text" name="lastName" value="<?= $lname ?? '' ?>">
+        <input placeholder="Specialization" type="text" name="specialization" value="<?= $special ?? '' ?>">
+        <input placeholder="Tel" type="text" name="phone" value="<?= $tel ?? '' ?>">
+        <input placeholder="Email" type="email" name="email" value="<?= $Email ?? '' ?>">
+
+        <select class="js-single-select" name="dep_name">
+            <option selected disabled></option>
+            <?php
+            $sql = "select DISTINCT departementName,location from departement ";
+            $select_dep_name = mysqli_query($conn,$sql);
+            $arr = mysqli_fetch_all($select_dep_name);
+            for($i=0 ; $i<mysqli_num_rows($select_dep_name); $i++){
+            ?>
+            <option value="<?php echo $arr[$i][0]."(".$arr[$i][1].")"?>"><?php echo $arr[$i][0]."(".$arr[$i][1].")"?></option>
+            <?php }?>
+        </select>
+        <button class="form_button" type="submit" name="submit">
             <?php
             if(isset($_GET['id'])){
                 echo "Update";

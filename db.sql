@@ -36,6 +36,28 @@ INSERT INTO departement (departementName, location) VALUES
 ('Oncology', 'Block F'),
 ('Dermatology', 'Block C'),
 ('Psychiatry', 'Block B');
+Insert into departement (departementName,location) VALUES
+('Urology', 'Block D'),
+('Nephrology', 'Block E'),
+('Gastroenterology', 'Block F'),
+('Pulmonology', 'Block A'),
+('Endocrinology', 'Block B'),
+('Hematology', 'Block C'),
+('Rheumatology', 'Block D'),
+('Ophthalmology', 'Block E'),
+('ENT', 'Block F'),
+('Anesthesiology', 'Block A'),
+('Geriatrics', 'Block B'),
+('Infectious Diseases', 'Block C'),
+('Plastic Surgery', 'Block D'),
+('Vascular Surgery', 'Block E'),
+('Thoracic Surgery', 'Block F'),
+('Neurosurgery', 'Block A'),
+('Intensive Care', 'Block B'),
+('Pathology', 'Block C'),
+('Nuclear Medicine', 'Block D'),
+('Rehabilitation', 'Block E'),
+('Pain Management', 'Block F');
 --patient table's fake data
 INSERT INTO patient 
 (firstName, lastName, gender, dateOfBirth, phoneNum, email, address) VALUES
