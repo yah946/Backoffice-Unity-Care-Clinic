@@ -1,5 +1,9 @@
 <?php
-include "config.php";
+session_start();
+if(!isset($_SESSION['USER-ID'])){
+    header("Location: login.php");
+    die();
+}
 $error = '';
 $suc = '';
 if($_SERVER['REQUEST_METHOD'] == "POST"){
@@ -46,6 +50,8 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
     <link rel="icon" type="image/x-icon" href="./assets/images/favicon.ico">
     <link rel="stylesheet" href="./assets/CSS/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.5.0/chart.min.js">
+    <script src="path/to/chartjs/dist/chart.umd.min.js></script>
     <title>Insert a Doctor</title>
 </head>
 <body class="insert">

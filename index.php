@@ -1,9 +1,10 @@
 <?php
-// $domain='main';
-// $long='fr_FR';
-// bindtextdomain($domain,realpath('./') . DIRECTORY_SEPARATOR . 'locale');
-// textdomain($domain);
-// setlocale(LC_ALL,'fr_FR');
+session_start();
+include 'config.php';
+if(!isset($_SESSION['USER-ID'])){
+    header("Location: login.php");
+    die();
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -15,6 +16,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="./assets/images/favicon.ico">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="./assets/CSS/style.css">
     <title>Backoffice Unity CC</title>
 </head>
@@ -37,7 +39,7 @@
                 <i class="fa-solid fa-user-doctor"></i>
                 <p>Doctors</p>
             </a></li>
-            <li class="menu-logout"><a href="">
+            <li class="menu-logout"><a href="logout.php">
                 <i class="fa-solid fa-arrow-right-from-bracket"></i>
                 <p>Log Out</p>
             </a></li>

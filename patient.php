@@ -1,3 +1,11 @@
+<?php
+session_start();
+include 'config.php';
+if(!isset($_SESSION['USER-ID'])){
+    header("Location: login.php");
+    die();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,7 +38,7 @@
                 <i class="fa-solid fa-user-doctor"></i>
                 <p>Doctors</p>
             </a></li>
-            <li class="menu-logout"><a href="">
+            <li class="menu-logout"><a href="logout.php">
                 <i class="fa-solid fa-arrow-right-from-bracket"></i>
                 <p>Log Out</p>
             </a></li>

@@ -1,4 +1,9 @@
 <?php
+session_start();
+if(!isset($_SESSION['USER-ID'])){
+    header("Location: login.php");
+    die();
+}
 include "config.php";
 $error = '';
 $suc = '';

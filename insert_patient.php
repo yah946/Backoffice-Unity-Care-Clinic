@@ -1,4 +1,9 @@
 <?php
+session_start();
+if(!isset($_SESSION['USER-ID'])){
+    header("Location: login.php");
+    die();
+}
 $location = explode('/',$_SERVER['HTTP_REFERER']);
 $location = explode('/',$_SERVER['HTTP_REFERER'])[3];
 include "config.php";

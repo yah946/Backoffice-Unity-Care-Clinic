@@ -80,3 +80,10 @@ INSERT INTO doctor
 INSERT INTO patient 
 (firstName)
 VALUES ('Mahomed');
+-- For log in page
+CREATE TABLE login(
+    id int AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    email VARCHAR(100) not null UNIQUE,
+    passwd VARCHAR(8) not null
+);
+insert into login (email,passwd) VALUES('admin@Backofficeunitycc.com','admin123')
