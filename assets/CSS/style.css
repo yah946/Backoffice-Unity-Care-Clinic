@@ -188,3 +188,14 @@ form input,form button, form select{
 select option{
     background-color: #09203f;
 }
+.chart-container{
+    width: 60%;
+    color: #ddd;
+    margin: 24px auto 0 auto;
+}
+td{
+    max-width: 180px;
+    overflow-y: auto;
+    scrollbar-width:thin;
+    scrollbar-color: #ff8723 transparent;
+}

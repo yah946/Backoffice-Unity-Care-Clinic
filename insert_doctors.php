@@ -4,20 +4,22 @@ if(!isset($_SESSION['USER-ID'])){
     header("Location: login.php");
     die();
 }
-$error = '';
-$suc = '';
 if($_SERVER['REQUEST_METHOD'] == "POST"){
     $f_name = filter_input(INPUT_POST,'firstName',FILTER_SANITIZE_SPECIAL_CHARS);
     $l_name = filter_input( INPUT_POST,'lastName',FILTER_SANITIZE_SPECIAL_CHARS);
     $special = filter_input(INPUT_POST,'specialization',FILTER_SANITIZE_SPECIAL_CHARS);
     $tel = filter_input(INPUT_POST,'phone',FILTER_SANITIZE_NUMBER_INT);
     $email = filter_input(INPUT_POST,'email',FILTER_VALIDATE_EMAIL);
+    $dep = filter_input(INPUT_POST,'dep_name',FILTER_SANITIZE_SPECIAL_CHARS);
+    $dep_name = explode('|',$dep)[0];
+    $dep_block = explode('|',$dep)[1];
+    $dep_id = mysqli_query($conn,"select id from departement where departementName=\"$dep_name\" and location=\"$dep_block\"");
     if(isset($_GET['id'])){
         if($f_name && $l_name && $email && $special && $tel){
             $id = $_GET['id'];
-            $query = "update doctor set firstName=?, lastName=?,specialization=?,phoneNum=?, email=? where id = ?";
+            $query = "update doctor set firstName=?, lastName=?,specialization=?,phoneNum=?, email=?,departement_id=? where id = ?";
             $stm = mysqli_prepare($conn,$query);
-            mysqli_stmt_bind_param($stm,'sssssi',$f_name,$l_name,$special,$tel,$email,$id);
+            mysqli_stmt_bind_param($stm,'sssssii',$f_name,$l_name,$special,$tel,$email,$dep_id,$id);
             mysqli_stmt_execute($stm);
             $suc = "Data has been changed";
             echo "<script>location.href = 'doctor.php';</script>";
@@ -26,11 +28,10 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
         }
     }else{
         if($f_name && $l_name && $email && $special && $tel){
-            $query = "insert into doctor (firstName, lastName, specialization, phoneNum, email) values(?,?,?,?,?)";
+            $query = "insert into doctor (firstName, lastName, specialization, phoneNum, email,departement_id) values(?,?,?,?,?,?)";
             $stm = mysqli_prepare($conn,$query);
-            mysqli_stmt_bind_param($stm,'sssss',$f_name,$l_name,$special,$tel,$email);
+            mysqli_stmt_bind_param($stm,'sssssi',$f_name,$l_name,$special,$tel,$email,$dep_id);
             mysqli_stmt_execute($stm);
-            $suc = "Data has been saved";
             // echo "<script>location.href = 'patient.php';</script>";
             header('location:doctor.php');
         }else{
@@ -89,7 +90,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
             $arr = mysqli_fetch_all($select_dep_name);
             for($i=0 ; $i<mysqli_num_rows($select_dep_name); $i++){
             ?>
-            <option value="<?php echo $arr[$i][0]."(".$arr[$i][1].")"?>"><?php echo $arr[$i][0]."(".$arr[$i][1].")"?></option>
+            <option value="<?php echo $arr[$i][0].'|'.$arr[$i][1]?>"><?php echo $arr[$i][0]."(".$arr[$i][1].")"?></option>
             <?php }?>
         </select>
         <button class="form_button" type="submit" name="submit">
