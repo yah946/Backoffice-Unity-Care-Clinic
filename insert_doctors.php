@@ -1,5 +1,6 @@
 <?php
 session_start();
+include "config.php";
 if(!isset($_SESSION['USER-ID'])){
     header("Location: login.php");
     die();
@@ -13,7 +14,8 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
     $dep = filter_input(INPUT_POST,'dep_name',FILTER_SANITIZE_SPECIAL_CHARS);
     $dep_name = explode('|',$dep)[0];
     $dep_block = explode('|',$dep)[1];
-    $dep_id = mysqli_query($conn,"select id from departement where departementName=\"$dep_name\" and location=\"$dep_block\"");
+    $select_id = mysqli_query($conn,"select id from departement where departementName=\"$dep_name\" and location=\"$dep_block\"");
+    $dep_id = mysqli_fetch_assoc($select_id)['id'];
     if(isset($_GET['id'])){
         if($f_name && $l_name && $email && $special && $tel){
             $id = $_GET['id'];
@@ -22,7 +24,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
             mysqli_stmt_bind_param($stm,'sssssii',$f_name,$l_name,$special,$tel,$email,$dep_id,$id);
             mysqli_stmt_execute($stm);
             $suc = "Data has been changed";
-            echo "<script>location.href = 'doctor.php';</script>";
+            header('location:doctor.php');
         }else{
             $error = "Invalid Input";
         }
@@ -32,7 +34,6 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
             $stm = mysqli_prepare($conn,$query);
             mysqli_stmt_bind_param($stm,'sssssi',$f_name,$l_name,$special,$tel,$email,$dep_id);
             mysqli_stmt_execute($stm);
-            // echo "<script>location.href = 'patient.php';</script>";
             header('location:doctor.php');
         }else{
             $error = "Invalid Input";
@@ -51,8 +52,6 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
     <link rel="icon" type="image/x-icon" href="./assets/images/favicon.ico">
     <link rel="stylesheet" href="./assets/CSS/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.5.0/chart.min.js">
-    <script src="path/to/chartjs/dist/chart.umd.min.js></script>
     <title>Insert a Doctor</title>
 </head>
 <body class="insert">
@@ -85,7 +84,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
         <select class="js-single-select" name="dep_name">
             <option selected disabled></option>
             <?php
-            $sql = "select DISTINCT departementName,location from departement ";
+            $sql = "select DISTINCT departementName,location from departement";
             $select_dep_name = mysqli_query($conn,$sql);
             $arr = mysqli_fetch_all($select_dep_name);
             for($i=0 ; $i<mysqli_num_rows($select_dep_name); $i++){
@@ -102,7 +101,6 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
             }
             ?>
         </button>
-
     </form>
 </body>
 </html>
